@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-class Hangman
+﻿class Hangman
 {
     static void Main(string[] args)
     {
@@ -27,7 +24,9 @@ class Hangman
         Console.WriteLine("4. Car Brand");
         Console.WriteLine("5. Animal");
 
-        bool validChoice = int.TryParse(Console.ReadLine(), out int choice);
+        var userInput = Console.ReadLine();
+
+        bool validChoice = int.TryParse(userInput, out int choice);
         if (!validChoice || choice < 1 || choice > 5)
         {
             Console.WriteLine("Invalid choice! Restarting the game...");
@@ -142,8 +141,34 @@ class Hangman
 
     static bool AskToPlayAgain()
     {
-        Console.WriteLine("\nDo you want to play again? (yes/no)");
-        string response = Console.ReadLine().Trim().ToLower();
-        return response == "yes";
+        bool doContinue = false;
+        bool doPlayAgain = false;
+
+        do
+        {
+            Console.WriteLine("\nDo you want to play again? (y/n)");
+            var response = $"{Console.ReadKey().KeyChar}".ToLower();
+
+            if (response == "y")
+            {
+                doPlayAgain = true;
+                doContinue = false;
+                Console.Clear();
+            }
+            else if(response == "n")
+            {
+                doPlayAgain = false;
+                doContinue = false;
+            }
+            else
+            {
+                Console.WriteLine($"\nWrong input: {response}.\n");
+                doContinue = true;
+            }
+
+        } while (doContinue);
+
+
+        return doPlayAgain;
     }
 }
