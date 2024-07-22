@@ -187,7 +187,7 @@ class Program
             Console.WriteLine(languageStrings["guessed_letters"] + string.Join(", ", guessedLetters));
             Console.WriteLine("Selected Category: " + selectedCategory);
             Console.Write(languageStrings["guess_letter"]);
-            char guessedLetter = char.ToUpper(Console.ReadKey().KeyChar);
+            char guessedLetter = char.ToUpper(Console.ReadLine()[0]);
 
             if (guessedLetters.Contains(guessedLetter))
             {
@@ -265,7 +265,7 @@ class Program
         do
         {
             Console.WriteLine($"\n{languageStrings["play_again"]}");
-            var response = $"{Console.ReadKey().KeyChar}".ToLower();
+            var response = $"{Console.ReadLine()}".ToLower();
 
             switch (response)
             {
