@@ -10,8 +10,13 @@ class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Select language: en (English), de (Deutsch), lt (Lietuvių)");
-        currentLanguage = Console.ReadLine().ToLower(); // make input check, if user enters bad input, not, en, de and lt
+        do
+        {
+            Console.WriteLine("Select language: en (English), de (Deutsch), lt (Lietuvių)");
+            currentLanguage = Console.ReadLine().ToLower();                                                    
+        }
+        while (!(currentLanguage == "en" || currentLanguage == "de" || currentLanguage == "lt"));
+
         LoadLanguageStrings();
         LoadCategoryData();
 
