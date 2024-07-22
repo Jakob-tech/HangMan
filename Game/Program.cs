@@ -6,6 +6,7 @@ class Hangman
     static Dictionary<string, string> languageStrings;
     static string currentLanguage = "en";
     static Dictionary<string, string[]> categoryData;
+    static string selectedCategory = "";
 
     static void Main(string[] args)
     {
@@ -147,18 +148,23 @@ class Hangman
         {
             case 1:
                 wordToGuess = categoryData["random_name"][random.Next(categoryData["random_name"].Length)];
+                selectedCategory = languageStrings["random_name"];
                 break;
             case 2:
                 wordToGuess = categoryData["country"][random.Next(categoryData["country"].Length)];
+                selectedCategory = languageStrings["country"];
                 break;
             case 3:
                 wordToGuess = categoryData["english_word"][random.Next(categoryData["english_word"].Length)];
+                selectedCategory = languageStrings["english_word"];
                 break;
             case 4:
                 wordToGuess = categoryData["car_brand"][random.Next(categoryData["car_brand"].Length)];
+                selectedCategory = languageStrings["car_brand"];
                 break;
             case 5:
                 wordToGuess = categoryData["animal"][random.Next(categoryData["animal"].Length)];
+                selectedCategory = languageStrings["animal"];
                 break;
         }
 
@@ -175,6 +181,7 @@ class Hangman
             Console.WriteLine("\n" + languageStrings["guess_word"] + new string(guessedWord));
             Console.WriteLine(languageStrings["attempts_left"] + attempts);
             Console.WriteLine(languageStrings["guessed_letters"] + string.Join(", ", guessedLetters));
+            Console.WriteLine("Selected Category: " + selectedCategory);
             Console.Write(languageStrings["guess_letter"]);
             char guessedLetter = char.ToUpper(Console.ReadLine()[0]);
 
@@ -223,25 +230,25 @@ class Hangman
         switch (incorrectGuesses)
         {
             case 0:
-                Console.WriteLine("  ___\n |    |\n |\n |\n |\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |\n |\n |\n |\n|");
                 break;
             case 1:
-                Console.WriteLine("  ___\n |    |\n |    O\n |\n |\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |\n |\n |\n|");
                 break;
             case 2:
-                Console.WriteLine("  ___\n |    |\n |    O\n |    |\n |\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |    |\n |\n |\n|");
                 break;
             case 3:
-                Console.WriteLine("  ___\n |    |\n |    O\n |   /|\n |\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |   /|\n |\n |\n|");
                 break;
             case 4:
-                Console.WriteLine("  ___\n |    |\n |    O\n |   /|\\\n |\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |   /|\\\n |\n |\n|");
                 break;
             case 5:
-                Console.WriteLine("  ___\n |    |\n |    O\n |   /|\\\n |   /\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |   /|\\\n |   /\n |\n|");
                 break;
             case 6:
-                Console.WriteLine("  ___\n |    |\n |    O\n |   /|\\\n |   / \\\n |\n|_");
+                Console.WriteLine("  __\n |    |\n |    O\n |   /|\\\n |   / \\\n |\n|");
                 break;
         }
     }
