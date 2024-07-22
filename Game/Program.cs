@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
 
 class Program
@@ -47,7 +48,7 @@ class Program
             languageStrings["already_guessed"] = "You already guessed that letter.";
             languageStrings["wrong_guess"] = "Wrong guess!";
             languageStrings["congratulations"] = "Congratulations! You guessed the word: ";
-            languageStrings["sorry"] = "Sorry! You ran out of attempts. The word was: ";
+            languageStrings["sorry"] = "Sorry! You ran out of gameParameters.Attempts. The word was: ";
             languageStrings["play_again"] = "Do you want to play again? (y/n)";
             languageStrings["wrong_input"] = "Wrong input: ";
             languageStrings["random_name"] = "Random Name";
@@ -151,62 +152,67 @@ class Program
             return;
         }
 
-        string wordToGuess = "";
+        var gameParameters = new GameParameters(6);
+
         Random random = new Random();
         switch (choice)
         {
             case 1:
-                wordToGuess = categoryData["random_name"][random.Next(categoryData["random_name"].Length)];
+                gameParameters.WordToGuess = categoryData["random_name"][random.Next(categoryData["random_name"].Length)];
                 selectedCategory = languageStrings["random_name"];
                 break;
             case 2:
-                wordToGuess = categoryData["country"][random.Next(categoryData["country"].Length)];
+                gameParameters.WordToGuess = categoryData["country"][random.Next(categoryData["country"].Length)];
                 selectedCategory = languageStrings["country"];
                 break;
             case 3:
-                wordToGuess = categoryData["english_word"][random.Next(categoryData["english_word"].Length)];
+                gameParameters.WordToGuess = categoryData["english_word"][random.Next(categoryData["english_word"].Length)];
                 selectedCategory = languageStrings["english_word"];
                 break;
             case 4:
-                wordToGuess = categoryData["car_brand"][random.Next(categoryData["car_brand"].Length)];
+                gameParameters.WordToGuess = categoryData["car_brand"][random.Next(categoryData["car_brand"].Length)];
                 selectedCategory = languageStrings["car_brand"];
                 break;
             case 5:
-                wordToGuess = categoryData["animal"][random.Next(categoryData["animal"].Length)];
+                gameParameters.WordToGuess = categoryData["animal"][random.Next(categoryData["animal"].Length)];
                 selectedCategory = languageStrings["animal"];
                 break;
-        }
+        }        
 
-        wordToGuess = wordToGuess.ToUpper();
-        char[] guessedWord = new string('_', wordToGuess.Length).ToCharArray();
-        List<char> guessedLetters = new List<char>();
-        int attempts = 6;
-        bool wordGuessed = false;
+        gameParameters.WordToGuess = gameParameters.WordToGuess.ToUpper();
 
-        while (attempts > 0 && !wordGuessed)
+        char[] guessedWord = gameParameters.EmptyLine();
+
+        while (gameParameters.Attempts > 0 && !gameParameters.WordGuessed)
         {
             Console.Clear();
-            DisplayHangman(6 - attempts);
+            DisplayHangman(6 - gameParameters.Attempts);
             Console.WriteLine("\n" + languageStrings["guess_word"] + new string(guessedWord));
-            Console.WriteLine(languageStrings["attempts_left"] + attempts);
-            Console.WriteLine(languageStrings["guessed_letters"] + string.Join(", ", guessedLetters));
+            Console.WriteLine(languageStrings["attempts_left"] + gameParameters.Attempts);
+            Console.WriteLine(languageStrings["guessed_letters"] + string.Join(", ", gameParameters.GuessedLetters));
             Console.WriteLine("Selected Category: " + selectedCategory);
             Console.Write(languageStrings["guess_letter"]);
-            char guessedLetter = char.ToUpper(Console.ReadLine()[0]);
 
-            if (guessedLetters.Contains(guessedLetter))
+            do
+            {
+                userInput = Console.ReadLine();
+            } while (userInput == null || userInput == "");
+
+            char guessedLetter = char.ToUpper(userInput[0]);
+
+            if (gameParameters.GuessedLetters.Contains(guessedLetter))
             {
                 Console.WriteLine(languageStrings["already_guessed"]);
                 continue;
             }
 
-            guessedLetters.Add(guessedLetter);
+            gameParameters.GuessedLetters.Add(guessedLetter);
 
-            if (wordToGuess.Contains(guessedLetter))
+            if (gameParameters.WordToGuess.Contains(guessedLetter))
             {
-                for (int i = 0; i < wordToGuess.Length; i++)
+                for (int i = 0; i < gameParameters.WordToGuess.Length; i++)
                 {
-                    if (wordToGuess[i] == guessedLetter)
+                    if (gameParameters.WordToGuess[i] == guessedLetter)
                     {
                         guessedWord[i] = guessedLetter;
                     }
@@ -214,23 +220,23 @@ class Program
             }
             else
             {
-                attempts--;
+                gameParameters.Attempts--;
                 Console.WriteLine(languageStrings["wrong_guess"]);
             }
 
-            wordGuessed = new string(guessedWord) == wordToGuess;
+            gameParameters.WordGuessed = new string(guessedWord) == gameParameters.WordToGuess;
         }
 
         Console.Clear();
-        DisplayHangman(6 - attempts);
+        DisplayHangman(6 - gameParameters.Attempts);
 
-        if (wordGuessed)
+        if (gameParameters.WordGuessed)
         {
-            Console.WriteLine("\n" + languageStrings["congratulations"] + wordToGuess);
+            Console.WriteLine("\n" + languageStrings["congratulations"] + gameParameters.WordToGuess);
         }
         else
         {
-            Console.WriteLine("\n" + languageStrings["sorry"] + wordToGuess);
+            Console.WriteLine("\n" + languageStrings["sorry"] + gameParameters.WordToGuess);
         }
     }
 
