@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class Hangman
+class Program
 {
     static Dictionary<string, string> languageStrings;
     static string currentLanguage = "en";
@@ -11,7 +11,7 @@ class Hangman
     static void Main(string[] args)
     {
         Console.WriteLine("Select language: en (English), de (Deutsch), lt (Lietuvių)");
-        currentLanguage = Console.ReadLine().ToLower();
+        currentLanguage = Console.ReadLine().ToLower(); // make input check, if user enters bad input, not, en, de and lt
         LoadLanguageStrings();
         LoadCategoryData();
 
@@ -19,6 +19,10 @@ class Hangman
         {
             PlayGame();
         } while (AskToPlayAgain());
+
+        //for your info
+        //var raide = 'd';
+        //Console.WriteLine((int)raide);
     }
 
     static void LoadLanguageStrings()
@@ -99,27 +103,27 @@ class Hangman
 
         if (currentLanguage == "en")
         {
-            categoryData["random_name"] = new string[] { "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack" };
-            categoryData["country"] = new string[] { "Germany", "France", "Italy", "Spain", "Canada", "Brazil", "Australia", "India", "Japan", "Mexico" };
-            categoryData["english_word"] = new string[] { "computer", "programming", "hangman", "dictionary", "algorithm", "network", "database", "software", "hardware", "debugging" };
-            categoryData["car_brand"] = new string[] { "Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai" };
-            categoryData["animal"] = new string[] { "elephant", "tiger", "giraffe", "kangaroo", "penguin", "dolphin", "crocodile", "rhinoceros", "hippopotamus", "flamingo" };
+            categoryData["random_name"] = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"];
+            categoryData["country"] = ["Germany", "France", "Italy", "Spain", "Canada", "Brazil", "Australia", "India", "Japan", "Mexico"];
+            categoryData["english_word"] = ["computer", "programming", "hangman", "dictionary", "algorithm", "network", "database", "software", "hardware", "debugging"];
+            categoryData["car_brand"] = ["Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai"];
+            categoryData["animal"] = ["elephant", "tiger", "giraffe", "kangaroo", "penguin", "dolphin", "crocodile", "rhinoceros", "hippopotamus", "flamingo"];
         }
         else if (currentLanguage == "de")
         {
-            categoryData["random_name"] = new string[] { "Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Greta", "Hannah", "Ivy", "Jakob" };
-            categoryData["country"] = new string[] { "Deutschland", "Frankreich", "Italien", "Spanien", "Kanada", "Brasilien", "Australien", "Indien", "Japan", "Mexiko" };
-            categoryData["english_word"] = new string[] { "Computer", "Programmieren", "Hangman", "Wörterbuch", "Algorithmus", "Netzwerk", "Datenbank", "Software", "Hardware", "Debugging" };
-            categoryData["car_brand"] = new string[] { "Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai" };
-            categoryData["animal"] = new string[] { "Elefant", "Tiger", "Giraffe", "Känguru", "Pinguin", "Delfin", "Krokodil", "Nashorn", "Nilpferd", "Flamingo" };
+            categoryData["random_name"] = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Greta", "Hannah", "Ivy", "Jakob"];
+            categoryData["country"] = ["Deutschland", "Frankreich", "Italien", "Spanien", "Kanada", "Brasilien", "Australien", "Indien", "Japan", "Mexiko"];
+            categoryData["english_word"] = ["Computer", "Programmieren", "Hangman", "Wörterbuch", "Algorithmus", "Netzwerk", "Datenbank", "Software", "Hardware", "Debugging"];
+            categoryData["car_brand"] = ["Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai"];
+            categoryData["animal"] = ["Elefant", "Tiger", "Giraffe", "Känguru", "Pinguin", "Delfin", "Krokodil", "Nashorn", "Nilpferd", "Flamingo"];
         }
         else if (currentLanguage == "lt")
         {
-            categoryData["random_name"] = new string[] { "Alicija", "Bobas", "Čarlis", "Deividas", "Eva", "Frankas", "Gracija", "Hana", "Iva", "Džekas" };
-            categoryData["country"] = new string[] { "Vokietija", "Prancūzija", "Italija", "Ispanija", "Kanada", "Brazilija", "Australija", "Indija", "Japonija", "Meksika" };
-            categoryData["english_word"] = new string[] { "kompiuteris", "programavimas", "kartuvas", "žodynas", "algoritmas", "tinklas", "duomenų bazė", "programinė įranga", "aparatinė įranga", "derinimas" };
-            categoryData["car_brand"] = new string[] { "Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai" };
-            categoryData["animal"] = new string[] { "dramblys", "tigras", "žirafa", "kengūra", "pingvinas", "delfinas", "krokodilas", "rinozauras", "begemotas", "flamingas" };
+            categoryData["random_name"] = ["Alicija", "Bobas", "Čarlis", "Deividas", "Eva", "Frankas", "Gracija", "Hana", "Iva", "Džekas"];
+            categoryData["country"] = ["Vokietija", "Prancūzija", "Italija", "Ispanija", "Kanada", "Brazilija", "Australija", "Indija", "Japonija", "Meksika"];
+            categoryData["english_word"] = ["kompiuteris", "programavimas", "kartuvas", "žodynas", "algoritmas", "tinklas", "duomenų bazė", "programinė įranga", "aparatinė įranga", "derinimas"];
+            categoryData["car_brand"] = ["Toyota", "Honda", "Ford", "BMW", "Audi", "Mercedes", "Volkswagen", "Chevrolet", "Nissan", "Hyundai"];
+            categoryData["animal"] = ["dramblys", "tigras", "žirafa", "kengūra", "pingvinas", "delfinas", "krokodilas", "rinozauras", "begemotas", "flamingas"];
         }
     }
 
@@ -183,7 +187,7 @@ class Hangman
             Console.WriteLine(languageStrings["guessed_letters"] + string.Join(", ", guessedLetters));
             Console.WriteLine("Selected Category: " + selectedCategory);
             Console.Write(languageStrings["guess_letter"]);
-            char guessedLetter = char.ToUpper(Console.ReadLine()[0]);
+            char guessedLetter = char.ToUpper(Console.ReadKey().KeyChar);
 
             if (guessedLetters.Contains(guessedLetter))
             {
@@ -263,21 +267,23 @@ class Hangman
             Console.WriteLine($"\n{languageStrings["play_again"]}");
             var response = $"{Console.ReadKey().KeyChar}".ToLower();
 
-            if (response == "y" || response == "j" || response == "t")
+            switch (response)
             {
-                doPlayAgain = true;
-                doContinue = false;
-                Console.Clear();
-            }
-            else if (response == "n")
-            {
-                doPlayAgain = false;
-                doContinue = false;
-            }
-            else
-            {
-                Console.WriteLine($"\n{languageStrings["wrong_input"]} {response}.\n");
-                doContinue = true;
+                case "y":
+                case "j":
+                case "t":
+                    doPlayAgain = true;
+                    doContinue = false;
+                    Console.Clear();
+                    break;
+                case "n":
+                    doPlayAgain = false;
+                    doContinue = false;
+                    break;
+                default:
+                    Console.WriteLine($"\n{languageStrings["wrong_input"]} {response}.\n");
+                    doContinue = true;
+                    break;
             }
 
         } while (doContinue);
